@@ -5,9 +5,9 @@
 2. Choose File->New->Project…
 3. In the search box in the upper right corner, type "Azure Resource Group" and choose the one for Visual C#
 4. Use the following information:
-    Name : AzureADLabTemplate
+    Name : AzureLabTemplate
     Location: Use the suggested location
-    SolutionName: AzureADLabTemplate
+    SolutionName: AzureLabTemplate
     Click OK
 5. Select Blank Template and click OK.
 6. In Solution Explorer, open azuredeploy.json
@@ -16,10 +16,10 @@
     Name: DC01
 
     **Storage account: Choose <Create new…>**
-    Name: adlabstorage
+    Name: azurelabstorage
 
     **Virtual Network: <Create new…>**
-    Name: AdLabNet
+    Name: AzureLabNet
 8. Note that Visual Studio not only created the three resources selected but also added a network interface, a few parameters and a bunch of variables for us.
 9. Now add a Public IP Address resource using the following information:
     Name: DC01PublicIP
@@ -54,9 +54,9 @@
 20. Configure DC01Nic with the static IPAddress defined in variable DC01PrivateIPAddress
 21. In the properties for the AdLabNet VNET, add a property called dhcpOptions and within it configure the list of dnsServers to contain the IP in variable DC01PrivateIPAddress as well as "8.8.8.8".
 22. In Solution Explorer, right click your project and choose Deploy -> New…
-23. Log in with the LiveID associated with your AzurePass, fill in all the fields, check "Validate Only" and click OK
+23. Log in with the LiveID associated with your AzurePass, select the subcription with your AzurePass, select the resource group "AzureLab-RG" created in the previous lab. Check "Validate Only" and click OK
 24. Leave the parameters as-is and enter a password when requested.
-25. The deployment will fail, probably telling you that the storage account name is invalid. Update the storage account name variable to only use "adlabstor" instead of "adlabstorage".
+25. The deployment will fail, probably telling you that the storage account name is invalid. Update the storage account name variable to only use "dcstorage" instead of "azurelabstorage".
 26. Run the validation again. This time using the same deployment as last time but don't forget to check the validate only checkbox.
 27. Fix any new errors that were found.
 28. Once the template validates, go ahead and deploy it to Azure.
@@ -69,7 +69,7 @@
 5. In the ProtectedSettings section, add a complex object called configurationArguments.
 6. Inside the newly created configurationArguments, create an object called DomainCreds containing two strings, userName and password containing the value of the parameters AdminUserName and AdminPassword.
 7. Download the modules xActiveDirectory and xStorage, put them into your project folder and include them into the project.
-    a. In solution explorer, rightclick AzureADLabTemplate and click Open folder in File Explorer.
+    a. In solution explorer, rightclick AzureLabTemplate and click Open folder in File Explorer.
     b. Copy the path to your project folder and download the modules using PowerShellGet
     *Save-Module -Name xActiveDirectory, xStorage -Path $ProjectPath*
     c. Back in Solution Explorer in Visual Studio, click the little button called "Show all files", right-click the module directories and click "Include in Project"
