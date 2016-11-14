@@ -1,7 +1,7 @@
 Configuration Main
 {
 
-	Param ( [string] $nodeName, [string] $DomainName, [PSCredential] $DomainCreds )
+	Param ( [string] $DomainName, [PSCredential] $DomainCreds )
 
 	Import-DscResource -ModuleName PSDesiredStateConfiguration, xActiveDirectory, xStorage
 
